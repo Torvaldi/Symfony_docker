@@ -6,7 +6,7 @@ ENV DATABASE_PASSWORD=password
 ENV DATABASE_HOST=host
 ENV DATABASE_PORT=port
 
-ENV APP_ENV=production
+ENV APP_ENV=prod
 ENV APP_SECRET=jfbzdjqkfbsdkqfbdsqkjfnkjdsqbfkuqdsbfkubqu
 ENV APP_DEBUG=0
 
@@ -23,3 +23,5 @@ RUN touch .env
 RUN docker-php-ext-install pdo pdo_mysql && apt update && apt install -y git zip unzip
 
 RUN composer install --no-dev --optimize-autoloader
+
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
