@@ -1,17 +1,24 @@
 services:
+  # Base de données MariaDB
   mariadb:
     image: mariadb
+    # On expose le port 3306 de la base de données
     ports:
       - "3306:3306"
     environment:
+      # Mot de passe de l'utilisateur root
       MYSQL_ROOT_PASSWORD: root
+      # Nom de la base de données créée par défaut
       MYSQL_DATABASE: test_sf
 
+  # Image de notre application
   symfony:
-    image: test_sf
+    # Compilation depuis le Dockerfile au même niveau que ce fichier
     build: .
+    # On expose le port 80 de notre application sur le port 8000 de notre machine
     ports:
       - "8000:80"
+    # On indique à Docker que notre application dépend de la base de données grâce aux variables d'environnement
     environment:
       DATABASE_HOST: mariadb
       DATABASE_PORT: 3306
