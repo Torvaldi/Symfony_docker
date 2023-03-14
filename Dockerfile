@@ -36,5 +36,8 @@ RUN composer install --no-dev --optimize-autoloader
 # On défini notre utilisateur comme étant www-data (pour éviter les problèmes de droits)
 USER www-data
 
+# On s'assure que le script d'entrée est exécutable
+RUN chmod +x docker-entrypoint.sh
+
 # On défini le point d'entrée de notre image Docker
-ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
